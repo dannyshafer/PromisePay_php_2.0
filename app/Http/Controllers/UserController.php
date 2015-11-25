@@ -4,7 +4,6 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
 //namespace PromisePay;
 use PromisePay\PromisePay;
 
@@ -38,34 +37,20 @@ class UsersController extends Controller
         $dob = $request->input('dob');
 
         PromisePay::Configuration()->environment('prelive'); // Use 'production' for the production environment.
-        PromisePay::Configuration()->login('andrew2@webzelite.com.au');
-        PromisePay::Configuration()->password('e24e32bd40fdb149279ea0a34515c576');
+        PromisePay::Configuration()->login(env('PROMISEPAY_USERNAME'));
+        PromisePay::Configuration()->password(env('PROMISEPAY_PASSWORD'));
         $user = PromisePay::User()->create(array(
             'id' => (string)mt_rand(),
-            'email' => (string)mt_rand() . $email,
+            'email' => $email,
             'first_name' => $first_name,
             'last_name' => $last_name,
             'address_line1' => $address_line1,
             'state' => $state,
             'city' => $city,
             'zip' => $zip,
-            'country' =>'AUS',
+            'country' => $country,
             'dob' => $dob
         ));
-        // $repo = new PromisePay\UserRepository();
-        // $user = new PromisePay\DataObjects\User($arr = array(
-        //     'id' => (string)mt_rand(),
-        //     'email' => $email,
-        //     'first_name' => $first_name,
-        //     'last_name' => $last_name,
-        //     'address_line1' => $address_line1,
-        //     'state' => $state,
-        //     'city' => $city,
-        //     'zip' => $zip,
-        //     'country' => $country,
-        //     'dob' => $dob
-        // ));
-        // $repo->createUser($user);
         return redirect('/');
     }
     public function store()
