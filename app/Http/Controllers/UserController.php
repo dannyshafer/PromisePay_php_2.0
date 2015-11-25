@@ -4,7 +4,10 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use PromisePay;
+
+//namespace PromisePay;
+use PromisePay\PromisePay;
+
 class UsersController extends Controller
 {
     /**
@@ -33,19 +36,20 @@ class UsersController extends Controller
         $zip = $request->input('zip');
         $country = $request->input('country');
         $dob = $request->input('dob');
+
         PromisePay::Configuration()->environment('prelive'); // Use 'production' for the production environment.
-        PromisePay::Configuration()->login(env('PROMISEPAY_USERNAME'));
-        PromisePay::Configuration()->password(env('PROMISEPAY_PASSWORD'));
+        PromisePay::Configuration()->login('andrew2@webzelite.com.au');
+        PromisePay::Configuration()->password('e24e32bd40fdb149279ea0a34515c576');
         $user = PromisePay::User()->create(array(
             'id' => (string)mt_rand(),
-            'email' => $email,
+            'email' => (string)mt_rand() . $email,
             'first_name' => $first_name,
             'last_name' => $last_name,
             'address_line1' => $address_line1,
             'state' => $state,
             'city' => $city,
             'zip' => $zip,
-            'country' => $country,
+            'country' =>'AUS',
             'dob' => $dob
         ));
         // $repo = new PromisePay\UserRepository();
