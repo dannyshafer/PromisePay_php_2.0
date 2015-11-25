@@ -1,6 +1,4 @@
-README
-
-This is a simple Laravel integration tutorial for getting started with the PromisePay API in the context of a Laravel application. You can follow along with the tutorial here: https://promisepay-docs.readme.io/v1.0/docs/php-api
+This is a simple Laravel integration tutorial for getting started with the PromisePay API in the context of a Laravel application.
 
 Clone<br>
 Composer install<br>
