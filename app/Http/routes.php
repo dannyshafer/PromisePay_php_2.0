@@ -25,6 +25,4 @@ Route::get('/users/new', function () {
 
 Route::post('/users/new', 'UsersController@create');
 
-Route::get('users/{id}', function ($id) {
-    return view('users.show', ['id' => $id]);
-});
+Route::get('users/{id}','UsersController@show');

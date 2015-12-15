@@ -4,7 +4,6 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-//namespace PromisePay;
 use PromisePay\PromisePay;
 
 class UsersController extends Controller
@@ -65,14 +64,13 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        //
+        PromisePay::Configuration()->environment('prelive'); // Use 'production' for the production environment.
+        PromisePay::Configuration()->login(env('PROMISEPAY_USERNAME'));
+        PromisePay::Configuration()->password(env('PROMISEPAY_PASSWORD'));
+        $user = PromisePay::User()->get($id);
+
+        return $user;
     }
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return Response
-     */
     public function edit($id)
     {
         //
